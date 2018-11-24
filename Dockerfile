@@ -2,8 +2,8 @@ FROM alpine:3.8
 MAINTAINER Thomas Spicer <thomas@openbridge.com>
 
 ARG RCLONE_VERSION="current"
-ARG GOCROND_VERSION="0.6.1"
-ARG GOCROND_TYPE="64"
+ARG SUPERCRONIC_VERSION="0.1.6"
+ARG SUPERCRONIC_TYPE="amd64"
 
 ENV RCLONE_TYPE="amd64"
 ENV BUILD_DEPS \
@@ -27,8 +27,8 @@ RUN set -x \
     && addgroup -g 1000 rclone \
     && adduser -SDH -u 1000 -s /bin/false rclone -G rclone \
     && sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf \
-		&& wget -O "/usr/local/bin/go-crond" "https://github.com/webdevops/go-crond/releases/download/${GOCROND_VERSION}/go-crond-${GOCROND_TYPE}-linux" \
-		&& chmod +x "/usr/local/bin/go-crond" \
+		&& wget -O "/usr/local/bin/supercronic" "https://github.com/aptible/supercronic/releases/download/v${SUPERCRONIC_VERSION}/supercronic-linux-${SUPERCRONIC_TYPE}" \
+		&& chmod +x "/usr/local/bin/supercronic" \
 	  && mkdir -p /config /defaults /data \
     && rm -Rf /tmp/* \
     && rm -rf /var/cache/apk/* \
